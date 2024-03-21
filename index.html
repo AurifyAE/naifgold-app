@@ -49,7 +49,7 @@
         margin: 0px;
       }
 
-      .main{
+      .main {
         padding: 0px;
       }
 
@@ -73,69 +73,36 @@
         margin-top: 12px;
       }
 
-      .main-content{
+      .main-content {
         margin-top: 20%;
       }
 
-      .card-table {
-        border-collapse: collapse;
-        border-spacing: 5px;
-        opacity: 0.9;
-        width: 100%;   
-      }
 
       table {
-        display: inline-block;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-left: 0px;
+        margin: 0px;
         font-size: 16px;
         color: black;
+        width: 100%;
       }
 
-      .card-table tbody {
-        margin-top: 12px;
-      }
-
-      .card-table tr {
-        background-color: #f9f9f9;
-        /* Light gray background for odd rows */
-      }
-
-      .card-table tbody tr:nth-child(even) {
-        background-color: #e6e6e6;
-        /* Dark gray background for even rows */
-      }
-
-
-
-      .card-table th {
+      table thead tr {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
         background-color: #B8860B;
-        color: white;
-
-
-      }
-
-      .card-table tbody td {
-        font-size: 12px;
-      }
-
-      .card-table th,
-      .card-table td {
+        width: 100%;
+        margin: 0;
         padding: 10px;
-        text-align: center;
+        border-radius: 10px;
       }
 
-      .card-table td {
-        font-weight: bold;
-        font-size: 12px;
-      }
 
-      /* Hover effect for better user experience */
-      .card-table tbody tr:hover {
-        background-color: #d3d3d3;
-        /* Lighter gray on hover */
+      table tbody tr {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        margin: 0;
+        padding: 0;
       }
 
 
@@ -231,12 +198,12 @@
         border-radius: 10px;
       }
 
-      .gold .label p{
+      .gold .label p {
         font-size: 24px;
         font-weight: 600;
       }
 
-      .silver .label p{
+      .silver .label p {
         font-size: 20px;
         font-weight: 600;
       }
@@ -253,7 +220,7 @@
 
       .silver {
         font-size: 20px;
-        
+
         border-radius: 10px;
       }
 
@@ -272,14 +239,17 @@
         width: 80px;
       }
 
+      .table-row {
+        width: 100%;
+      }
 
-      .table-row .data{
+      .table-row .data {
         border-radius: 10px;
       }
 
     }
 
-   body {
+    body {
       margin: 0;
       padding: 0px;
       font-family: "arial", Helvetica, sans-serif;
@@ -287,13 +257,15 @@
       background-image: url('./6638486_3392075.jpg');
       background-repeat: no-repeat;
       background-size: cover;
-      background-attachment: fixed; /* Prevent background from scrolling */
+      background-attachment: fixed;
+      /* Prevent background from scrolling */
       -webkit-animation: 20s linear 0s normal none infinite animate;
       -moz-animation: 20s linear 0s normal none infinite animate;
       -ms-animation: 20s linear 0s normal none infinite animate;
       -o-animation: 20s linear 0s normal none infinite animate;
       animation: 20s linear 0s normal none infinite animate;
-      height: 100vh; /* Adjusted to 100vh for full viewport height */
+      height: 100vh;
+      /* Adjusted to 100vh for full viewport height */
       width: 100%;
     }
 
@@ -403,34 +375,34 @@
             </div>
           </div>
         </div>
-
-
       </div>
-      <div style="margin-top: 10px;" class="table-row">
-        <div class="data">
-          <div class="row">
-            <div>
-              <div class="card-table">
-                <table>
-                  <thead style="margin-bottom: 0px;">
-                    <tr style="font-size: 12px;">
-                      <th colspan="2">COMMODITY</th>
-                      <th>UNIT</th>
-                      <th>BUY (<span id="currencySymbol">AED</span>)</th>
-                      <th>SELL (<span id="currencySymbol">AED</span>)</th>
-                    </tr>
-                    <tr style="height: 8px;background-color: transparent;"></tr>
-                  </thead>
 
-                  <tbody id="tableBodyTV">
-                    <!-- Table body content will be dynamically updated here -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <table class="mt-3 mb-0">
+        <thead style="margin-bottom: 0px;">
+          <tr style="font-size: 12px;">
+            <th colspan="2">COMMODITY</th>
+            <th>UNIT</th>
+            <th>SELL (<span id="currencySymbol">AED</span>)</th>
+          </tr>
+          <tr style="height: 8px;background-color: transparent;"></tr>
+        </thead>
+
+        <tbody id="tableBodyTV">
+          <!-- Table body content will be dynamically updated here -->
+        </tbody style="margin-bottom: 0px;" >
+      </table>
+
+      <table class="mt-0">
+        <thead>
+          <tr>
+            <th>Minted Bars</th>
+          </tr>
+        </thead>
+        <tbody id="tableMintedBars">
+          <!-- Table body content will be dynamically updated here -->
+        </tbody>
+      </table>
     </div>
   </main>
 

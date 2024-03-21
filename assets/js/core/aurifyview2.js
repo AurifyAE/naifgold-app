@@ -1,5 +1,5 @@
 // import { readSpreadValues } from '../core/spotrateDB.js';
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
 import { app } from '../../../config/db.js';
 
 const script = document.createElement('script');
@@ -258,7 +258,7 @@ async function fetchData1() {
 
 async function readSpreadValues() {
     try {
-        const uid = 'LnpQA4ZFsEPRbLul1zDTFj5tWvn1';
+        const uid = 'u5MUCo26GmQDVeFEZVFimwgd6vP2';
         if (!uid) {
             console.error('User not authenticated');
             throw new Error('User not authenticated');
@@ -304,22 +304,47 @@ displaySpreadValues();
 // Function to read data from the Firestore collection
 async function readData() {
     // Get the UID of the authenticated user
-    const uid = 'LnpQA4ZFsEPRbLul1zDTFj5tWvn1';
+    const uid = 'u5MUCo26GmQDVeFEZVFimwgd6vP2';
 
     if (!uid) {
         console.error('User not authenticated');
         return Promise.reject('User not authenticated');
     }
 
-    const querySnapshot = await getDocs(collection(firestore, `users/${uid}/commodities`));
-    const result = [];
-    querySnapshot.forEach((doc) => {
-        result.push({
-            id: doc.id,
-            data: doc.data()
+    // Create a reference to the user's commodities collection
+    const commoditiesCollectionRef = collection(firestore, `users/${uid}/commodities`);
+
+    try {
+        // Construct a query to order commodities by timestamp
+        const orderedQuery = query(commoditiesCollectionRef, orderBy("timestamp"));
+
+        // Execute the ordered query
+        const querySnapshot = await getDocs(orderedQuery);
+
+        // Initialize an array to store the results
+        const result = [];
+
+        // Iterate over the query snapshot to extract document data
+        querySnapshot.forEach((doc) => {
+            // Extract the timestamp field from the document data
+            const timestamp = doc.data().timestamp; // Assuming 'timestamp' is the field name
+            result.push({
+                id: doc.id,
+                data: doc.data(),
+                timestamp: timestamp // Add the timestamp to the result object
+            });
         });
-    });
-    return result;
+
+        // Sort the result array by timestamp
+        result.sort((a, b) => a.timestamp - b.timestamp);
+
+        // 'result' now contains commodities ordered by timestamp
+        console.log(result);
+        return result;
+
+    } catch (error) {
+        console.error("Error getting documents: ", error);
+    }
 }
 
 // Show Table from Database
@@ -329,7 +354,9 @@ async function showTable() {
         // console.log('Data read successfully:', tableData);
 
         const tableBody = document.getElementById('tableBodyTV');
-        // console.log(tableData);
+        // const tableCoins = document.getElementById('tableCoins');
+        const tableMintedBars = document.getElementById('tableMintedBars');
+        console.log(tableData);
 
         setInterval(() => {
             var silver = silverValue
@@ -355,17 +382,10 @@ async function showTable() {
 
             // Create a new table row
             const newRow = document.createElement("tr");
-            newRow.innerHTML = `
-            <td style="text-align: right;" id="metalInput">Gold</td>
-            <td style="text-align: left; font-size:10px; font-weight: 600;">${purityInput}</td>
-            <td>${unitInput} ${weightInput}</td>
-            <td id="buyAED">0</td>
-            <td id="sellAED">0</td>
-            
-            `;
+            // const newRow2 = document.createElement("tr");
+            const newRow3 = document.createElement("tr");
 
-            // Append the new row to the table body
-            tableBody.appendChild(newRow);
+            newRow.style.marginBottom = "25px"
 
             displaySpreadValues();
 
@@ -393,19 +413,55 @@ async function showTable() {
                 let bidSpreadValue = bidSpread || 0;
 
 
-                if (weight === "GM") {
-                    // Update the sellAED and buyAED values for the current 
-                    newRow.querySelector("#sellAED").innerText = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(2));
-                    newRow.querySelector("#buyAED").innerText = ((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(2);
-                } else {
-                    // Update the sellAED and buyAED values for the current row
-                    const sellAEDValue = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(4));
-                    const buyAEDValue = parseInt((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(0);
+                if (metalInput === "Gold" || metalInput === "Gold kilobar" || metalInput === "Gold TOLA" || metalInput === "Gold TEN TOLA") {
+                    newRow.innerHTML = `
+                    <td style="text-align: right;" id="metalInput">Gold</td>
+                    <td style="text-align: left; font-size:15px; font-weight: 600;">${purityInput}</td>
+                    <td >${unitInput} ${weightInput}</td>
+                    <td id="sellAED">0</td>
+                    `;
 
-                    newRow.querySelector("#sellAED").innerText = parseInt(sellAEDValue).toFixed(0); // Round to remove decimals
-                    newRow.querySelector("#buyAED").innerText = parseInt(buyAEDValue).toFixed(0);   // Round to remove decimals
+                    if (weight === "GM") {
+                        // Update the sellAED and buyAED values for the current 
+                        newRow.querySelector("#sellAED").innerText = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(2));
+                        newRow.querySelector("#buyAED").innerText = ((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(2);
+                    } else {
+                        // Update the sellAED and buyAED values for the current row
+                        const sellAEDValue = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(4));
+                        const buyAEDValue = parseInt((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(0);
+
+                        newRow.querySelector("#sellAED").innerText = parseInt(sellAEDValue).toFixed(0); // Round to remove decimals
+                        newRow.querySelector("#buyAED").innerText = parseInt(buyAEDValue).toFixed(0);   // Round to remove decimals
+                    }
+                } else if (metalInput === 'Minted Bar') {
+                    newRow3.innerHTML = `
+                    <td style="text-align: right;" id="metalInput">Minted Bars</td>
+                    <td style="text-align: left; font-size:28px; font-weight: 600;"></td>
+                    <td>${unitInput} ${weightInput}</td>
+                    <td id="sellAED">0</td>
+                    
+                    `;
+
+                    if (weight === "GM" && unitInput < 1) {
+                        // Update the sellAED and buyAED values for the current 
+                        newRow3.querySelector("#sellAED").innerText = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(2));
+                        newRow3.querySelector("#buyAED").innerText = ((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(2);
+                    } else {
+                        // Update the sellAED and buyAED values for the current row
+                        const sellAEDValue = parseFloat(((parseFloat(goldValue) + parseFloat(askSpreadValue) + parseFloat(0.5)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(sellPremium)).toFixed(4));
+                        const buyAEDValue = parseInt((parseFloat(goldValue) + parseFloat(bidSpreadValue)) * unitInput * unitMultiplier * (purityInput / Math.pow(10, purityInput.length)) + parseFloat(buyPremium)).toFixed(0);
+
+                        newRow3.querySelector("#sellAED").innerText = parseInt(sellAEDValue).toFixed(0); // Round to remove decimals
+                        newRow3.querySelector("#buyAED").innerText = parseInt(buyAEDValue).toFixed(0);   // Round to remove decimals
+                    }
                 }
             }, 500)
+
+
+            // Append the new row to the table body
+            tableBody.appendChild(newRow);
+            // tableCoins.appendChild(newRow2);
+            tableMintedBars.appendChild(newRow3);
         }
     } catch (error) {
         console.error('Error reading data:', error);
