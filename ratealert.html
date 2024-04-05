@@ -154,6 +154,117 @@
       }
     }
 
+
+    @media only screen and (min-width: 600px) {
+      body {
+        padding: 0;
+      }
+
+      .main-content{
+        margin-top: 20%;
+      }
+
+      .rs-control .rs-range-color {
+        background-color: #fff;
+      }
+
+      .rs-control .rs-path-color {
+        background-color: #fff;
+      }
+
+      .rs-control .rs-handle {
+        background-color: #B8860B;
+      }
+
+      .rs-control .rs-bg-color {
+        background-color: black;
+      }
+
+      .rs-control .rs-border.rs-outer,
+      .rs-control .rs-border.rs-inner {
+        border: none;
+      }
+
+      .gold-price {
+        text-align: center;
+        margin: 20px 0px;
+        color: #B8860B;
+      }
+
+      .alert-slider {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .alert-slider p {
+        color: #fff;
+        margin-top: 30%;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+
+      .value-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slider-value {
+        text-align: center;
+        color: #B8860B;
+        margin-bottom: 50px;
+        padding: 0px 20px;
+        width: max-content;
+      }
+
+      .alert {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+      }
+
+      .alert-label {
+        text-align: center;
+        color: #fff;            
+        font-size: 18px;
+      }
+
+      .alert button {
+        background-color: #fff;
+        border: none;
+        border-radius: 15px;
+        padding: 5px 15px;
+        color: black;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      .display{
+        display: flex;
+      }
+
+      .display-value {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .display-value p {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .display-value span {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
     body {
       margin: 0;
       padding: 40px;
@@ -373,6 +484,13 @@
   <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
   <!-- Date & Time -->
 
+  <script>
+    // Check if the screen width is below a certain threshold (e.g., 1000 pixels)
+    if (window.innerWidth > 900) {
+      // Redirect users from mobile and tablet devices to a different page or show an error message
+      window.location.href = '../../../pages/error.html'; // Redirect to a mobile error page
+    }
+  </script>
 </body>
 
 </html>
