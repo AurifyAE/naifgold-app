@@ -439,7 +439,6 @@ async function showTable() {
                     <td style="text-align: left; font-size:28px; font-weight: 600;"></td>
                     <td>${unitInput} ${weightInput}</td>
                     <td id="sellAED">0</td>
-                    
                     `;
 
                     if (weight === "GM" && unitInput < 1) {
