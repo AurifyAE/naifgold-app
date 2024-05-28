@@ -66,7 +66,7 @@
 
     span {
       color: #fff;
-      font-size: larger;
+      font-size: 35px;
     }
 
     .symbols {
@@ -176,6 +176,72 @@
       text-transform: uppercase;
     }
 
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+      body {
+        padding: 0px 10px;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+      span {
+        font-size: 20px;
+      }
+
+      .spot-rate .label p {
+        font-size: 20px;
+      }
+
+      .spot-rate .label h5 {
+        font-size: 14px;
+      }
+
+      .spot-rate .buy-sell .input-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        padding: 15px;
+      }
+
+      .spot-rate .buy-sell label {
+        font-size: 14px;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      table tbody td {
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+      }
+
+      table thead tr th {
+        font-size: 16px;
+      }
+
+      .tableMintedBars {
+        font-size: 16px;
+      }
+    }
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+      body {
+        padding: 0px 20px;
+      }
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+      body {
+        padding: 0px 20px;
+      }
+    }
 
     .rate-card {
       display: none;
@@ -281,9 +347,9 @@
       </table>
       <br>
 
-      <h5 class="tableMintedBars mt-5">Minted Bars</h5>
+      <h5 class="tableMintedBars mt-2">Minted Bars</h5>
       <table>
-        <thead >
+        <thead>
           <tr></tr>
         </thead>
         <tbody id="tableMintedBars">
