@@ -140,7 +140,6 @@
 
     table {
       width: 100%;
-      margin: 0px 0px 0px;
     }
 
     table thead tr {
@@ -157,22 +156,26 @@
 
     table thead tr th:first-child {
       border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
     }
 
     table thead tr th:last-child {
       border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
     }
 
     table tbody tr {
-      background-color: #fff;
+      background-color: #023a32;
     }
 
     table tbody td {
       font-size: 35px;
-      color: black;
+      color: #fff;
+      font-weight: 600;
       text-align: center;
+    }
+
+    table tbody tr{
+      border-bottom: 8px solid transparent;
+      background-clip: padding-box;
     }
 
     .tableMintedBars {
@@ -189,7 +192,7 @@
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
       body {
-        padding: 0px 10px;
+        padding: 0px 25px;
       }
 
       .logo {
@@ -222,13 +225,12 @@
 
       table {
         width: 100%;
-        margin: 0px -10px;
       }
 
       table tbody td {
         font-size: 20px;
         text-align: center;
-        color: black;
+        padding: 10px;
       }
 
       table thead tr th {
@@ -260,7 +262,7 @@
   </style>
 </head>
 
-<body class="d-flex justify-content-center align-items-center" style="display: flex; flex-direction: column;">
+<body style="display: flex; flex-direction: column;">
   <div
     style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; padding: 0px 15px;">
     <div style="display: flex; flex-direction: column; align-items: center;">
@@ -276,98 +278,97 @@
   </div>
 
   <!-- End Navbar -->
-  <div class="container-fluid pt-0">
-    <div class="row">
-      <div class="symbols">
-        <div></div>
-        <div class="buy-sell-label">
-          <p>BUY</p>
-          <div>
-            <i class="fa-solid fa-dollar-sign icon"></i>
-          </div>
-        </div>
-        <div class="buy-sell-label">
-          <p>SELL</p>
-          <div>
-            <i class="fa-solid fa-dollar-sign icon"></i>
-          </div>
+  <div>
+    <div class="symbols">
+      <div></div>
+      <div class="buy-sell-label">
+        <p>BUY</p>
+        <div>
+          <i class="fa-solid fa-dollar-sign icon"></i>
         </div>
       </div>
-
-
-      <!-- GOLD -->
-      <div class="spot-rate">
-        <div class="label">
-          <p style="color: #ffff; font-weight: 600;">Gold</p>
-          <h5 style="color: #fff; font-weight: 600;">oz</h5>
-        </div>
-        <div class="buy-sell">
-          <div class="form-control input-box" id="goldInputLow"></div>
-          <div>
-            <i class="fa-solid fa-caret-down icon" style="color: red;"></i>
-            <label id="lowLabelGold">0</label>
-          </div>
-        </div>
-        <div class="buy-sell">
-          <div class="form-control input-box" id="goldInputHigh"></div>
-          <div>
-            <i class="fa-solid fa-caret-up icon" style="color: green;"></i>
-            <label id="highLabelGold">0</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- silver -->
-      <div class="spot-rate" style="border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
-        <div class=" label">
-          <p style="color: #fff;">Silver</p>
-          <h5 style="color: #fff;">oz</h5>
-        </div>
-        <div class="buy-sell">
-          <div class="form-control input-box" id="silverInputLow"></div>
-          <div>
-            <i class="fa-solid fa-caret-down icon" style="color: red;"></i>
-            <label id="lowLabelSilver">0</label>
-          </div>
-        </div>
-
-        <div class="buy-sell">
-          <div class="form-control input-box" id="silverInputHigh"></div>
-          <div>
-            <i class="fa-solid fa-caret-up icon" style="color: green;"></i>
-            <label id="highLabelSilver">0</label>
-          </div>
+      <div class="buy-sell-label">
+        <p>SELL</p>
+        <div>
+          <i class="fa-solid fa-dollar-sign icon"></i>
         </div>
       </div>
     </div>
 
 
-    <table class="mt-3">
-      <thead style="margin-bottom: 0px;">
-        <tr>
-          <th colspan="2">COMMODITY</th>
-          <th>UNIT</th>
-          <th>SELL (<span id="currencySymbol">AED</span>)</th>
-        </tr>
-        <tr style="height: 8px;background-color: transparent;"></tr>
-      </thead>
+    <!-- GOLD -->
+    <div class="spot-rate">
+      <div class="label">
+        <p style="color: #ffff; font-weight: 600;">Gold</p>
+        <h5 style="color: #fff; font-weight: 600;">oz</h5>
+      </div>
+      <div class="buy-sell">
+        <div class="form-control input-box" id="goldInputLow"></div>
+        <div>
+          <i class="fa-solid fa-caret-down icon" style="color: red;"></i>
+          <label id="lowLabelGold">0</label>
+        </div>
+      </div>
+      <div class="buy-sell">
+        <div class="form-control input-box" id="goldInputHigh"></div>
+        <div>
+          <i class="fa-solid fa-caret-up icon" style="color: green;"></i>
+          <label id="highLabelGold">0</label>
+        </div>
+      </div>
+    </div>
 
-      <tbody id="tableBodyTV">
-        <!-- Table body content will be dynamically updated here -->
-      </tbody style="margin-bottom: 0px;">
-    </table>
-    <br>
+    <!-- silver -->
+    <div class="spot-rate" style="border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+      <div class=" label">
+        <p style="color: #fff;">Silver</p>
+        <h5 style="color: #fff;">oz</h5>
+      </div>
+      <div class="buy-sell">
+        <div class="form-control input-box" id="silverInputLow"></div>
+        <div>
+          <i class="fa-solid fa-caret-down icon" style="color: red;"></i>
+          <label id="lowLabelSilver">0</label>
+        </div>
+      </div>
 
-    <h5 class="tableMintedBars mt-2" style="display: none;">Minted Bars</h5>
-    <table style="display: none;">
-      <thead>
-        <tr></tr>
-      </thead>
-      <tbody id="tableMintedBars">
-        <!-- Table body content will be dynamically updated here -->
-      </tbody>
-    </table>
+      <div class="buy-sell">
+        <div class="form-control input-box" id="silverInputHigh"></div>
+        <div>
+          <i class="fa-solid fa-caret-up icon" style="color: green;"></i>
+          <label id="highLabelSilver">0</label>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <table class="mt-3">
+    <thead style="margin-bottom: 0px;">
+      <tr>
+        <th colspan="2">COMMODITY</th>
+        <th>UNIT</th>
+        <th>SELL (<span id="currencySymbol">AED</span>)</th>
+      </tr>
+      <tr style="height: 8px;background-color: transparent;"></tr>
+    </thead>
+
+    <tbody id="tableBodyTV">
+      <!-- Table body content will be dynamically updated here -->
+    </tbody style="margin-bottom: 0px;">
+  </table>
+  <br>
+
+  <h5 class="tableMintedBars mt-2" style="display: none;">Minted Bars</h5>
+  <table style="display: none;">
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody id="tableMintedBars">
+      <!-- Table body content will be dynamically updated here -->
+    </tbody>
+  </table>
+
+
 
 
   <div class="rate-card">
