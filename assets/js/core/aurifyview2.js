@@ -27,7 +27,7 @@ let askSpread, bidSpread, goldValue, silverBidSpread, silverAskSpread, goldBuy, 
 const API_KEY = 'goldapi-fbqpmirloto20zi-io'
 
 //
-async function fetchData() {
+function fetchData() {
     socket.on('goldValue', (goldValues) => {
         // console.log('Received gold value:', goldValue);
         const value = goldValues.bid;
@@ -339,7 +339,7 @@ async function readData() {
         result.sort((a, b) => a.timestamp - b.timestamp);
 
         // 'result' now contains commodities ordered by timestamp
-        console.log(result);
+        // console.log(result);
         return result;
 
     } catch (error) {
@@ -356,7 +356,7 @@ async function showTable() {
         const tableBody = document.getElementById('tableBodyTV');
         // const tableCoins = document.getElementById('tableCoins');
         const tableMintedBars = document.getElementById('tableMintedBars');
-        console.log(tableData);
+        // console.log(tableData);
 
         setInterval(() => {
             var silver = silverValue

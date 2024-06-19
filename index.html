@@ -41,7 +41,7 @@
   <style>
     body {
       margin: 0;
-      padding: 0px 300px;
+      padding: 0px 400px;
       font-family: "arial", Helvetica, sans-serif;
       font-size: 24px;
       background-image: url('./basdasj_2.jpg');
@@ -57,6 +57,31 @@
       height: 100vh;
       /* Adjusted to 100vh for full viewport height */
       width: 100%;
+    }
+
+    .date-time #date {
+      font-size: 38px;
+      text-transform: uppercase;
+    }
+
+    .date-time #day {
+      font-size: 35px;
+      text-transform: uppercase;
+    }
+
+    .date-time #time {
+      font-size: 45px;
+      text-transform: uppercase;
+    }
+
+    .date-time .fa-calendar-days {
+      font-size: 55px;
+      color: #fff;
+    }
+
+    .date-time .fa-clock {
+      font-size: 55px;
+      color: #fff;
     }
 
     .logo {
@@ -92,12 +117,12 @@
     .symbols .buy-sell-label p,
     .symbols .buy-sell-label i {
       font-size: 20px;
-      color: #fff;
+      color: #DAB236;
       font-weight: 600;
     }
 
     .symbols .buy-sell-label .icon {
-      color: #fff;
+      color: #DAB236;
     }
 
     .spot-rate {
@@ -106,7 +131,7 @@
       justify-content: space-between;
       background-color: #023a32;
       /* opacity: 80%; */
-      padding: 15px;
+      padding: 25px;
       width: 100%;
     }
 
@@ -123,6 +148,16 @@
 
     .spot-rate .label h5 {
       font-size: 25px;
+    }
+
+    .spot-rate .buy-sell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #035147;
+      border: 2px solid grey;
+      border-radius: 10px;
+      width: 190px;
     }
 
     .spot-rate .buy-sell .input-box {
@@ -151,7 +186,7 @@
     table thead tr th {
       padding: 10px;
       text-align: center;
-      color: #fff;
+      color: #DAB236;
     }
 
     table thead tr th:first-child {
@@ -189,10 +224,59 @@
       text-transform: uppercase;
     }
 
+    .news {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      overflow: hidden;
+      background-color: #035147;
+      height: max-content;
+      padding: 0px;
+    }
+
+    .text {
+      color: #fff;
+      white-space: nowrap;
+      animation: marquee-animation 20s linear infinite;
+    }
+
+    @keyframes marquee-animation {
+      from {
+        transform: translateX(100%);
+      }
+
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
       body {
         padding: 0px 25px;
+      }
+
+      .date-time #date {
+        font-size: 15px;
+      }
+
+      .date-time #day {
+        font-size: 15px;
+      }
+
+      .date-time #time {
+        font-size: 19px;
+      }
+
+      .date-time .fa-calendar-days {
+        font-size: 20px;
+      }
+
+      .date-time .fa-clock {
+        font-size: 25px;
       }
 
       .logo {
@@ -204,12 +288,20 @@
         font-size: 20px;
       }
 
+      .spot-rate {
+        padding: 10px;
+      }
+
       .spot-rate .label p {
         font-size: 20px;
       }
 
       .spot-rate .label h5 {
         font-size: 14px;
+      }
+
+      .spot-rate .buy-sell {
+        width: 104px;
       }
 
       .spot-rate .buy-sell .input-box {
@@ -253,7 +345,27 @@
     /* Medium devices (landscape tablets, 768px and up) */
     @media only screen and (min-width: 768px) {
       body {
-        padding: 0px 20px;
+        padding: 0px 50px;
+      }
+
+      .date-time #date {
+        font-size: 28px;
+      }
+
+      .date-time #day {
+        font-size: 25px;
+      }
+
+      .date-time #time {
+        font-size: 35px;
+      }
+
+      .date-time .fa-calendar-days {
+        font-size: 45px;
+      }
+
+      .date-time .fa-clock {
+        font-size: 45px;
       }
     }
 
@@ -264,17 +376,19 @@
 </head>
 
 <body style="display: flex; flex-direction: column;">
-  <div
+  <div class="date-time"
     style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; padding: 0px 15px;">
     <div style="display: flex; flex-direction: column; align-items: center;">
-      <span id="date" style="font-size: 14px; text-transform: uppercase;"></span>
-      <span id="day" style="font-size: 15px; text-transform: uppercase;"></span>
+      <i class="fa-regular fa-calendar-days"></i>
+      <span id="date"></span>
+      <span id="day"></span>
     </div>
     <div>
       <img class="logo" src="./naif logo.png" alt="">
     </div>
-    <div>
-      <span id="time" style="font-size: 19px; text-transform: uppercase;"></span>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <i class="fa-regular fa-clock"></i>
+      <span id="time"></span>
     </div>
   </div>
 
@@ -348,7 +462,7 @@
       <tr>
         <th colspan="2">COMMODITY</th>
         <th>UNIT</th>
-        <th>SELL (<span id="currencySymbol">AED</span>)</th>
+        <th>SELL (<span id="currencySymbol" style="color: #DAB236;">AED</span>)</th>
       </tr>
       <tr style="height: 8px;background-color: transparent;"></tr>
     </thead>
@@ -368,6 +482,9 @@
     </tbody>
   </table>
 
+  <div class="news">
+    <span class="text" id="displayNews"></span>
+  </div>
 
 
 
@@ -412,6 +529,7 @@
   <script type="module" src="./assets/js/core/dashboardDB.js"></script>
   <script type="module" src="./assets/js/core/spotrateDB.js"></script>
   <script type="module" defer src="./assets/js/core/aurifyview2.js"></script>
+  <script type="module" defer src="./assets/js/core/displayNews.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
 
 
