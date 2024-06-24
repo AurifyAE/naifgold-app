@@ -44,6 +44,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0px 0px;
       }
 
       .main-content {
@@ -53,7 +54,7 @@
       .container {
         max-width: 600px;
         margin: 50px auto;
-        padding: 20px;
+        padding: 10px;
         /* background-color: #053e32; */
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -93,6 +94,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0px 0px;
       }
 
       .main-content {
@@ -226,7 +228,6 @@
     }
 
 
-
     .card-table th {
       background-color: #005043;
       color: white;
@@ -310,6 +311,23 @@
       line-height: 1.5;
       font-size: 18px;
     }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 4px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
   </style>
 </head>
 
@@ -338,30 +356,32 @@
 
           <div class="bank-details">
             <!-- <h3>Bank Information</h3> -->
-            <div class="column">
-              <p>Holder Name</p>
-              <p>Bank Name</p>
-              <p>City</p>
-              <p>Account Number</p>
-              <p>IBAN</p>
-              <p>IFSC</p>
-              <p>SWIFT</p>
-              <p>Branch</p>
-              <p>Country</p>
-              <p>Country</p>
-            </div>
-            <div class="column">
-              <p>John Doe</p>
-              <p>Example Bank</p>
-              <p>Dubai</p>
-              <p>1234567890</p>
-              <p>IBAN1234567890</p>
-              <p>IFSC123456</p>
-              <p>2222222</p>
-              <p>Dubai</p>
-              <p>Dubai</p>
-              <p><img src="logo.png" alt="Bank Logo"></p>
-            </div>
+            <table>
+              <tr>
+                <td>Account Name</td>
+                <td>NAIF GOLD TRADING LLC</td>
+              </tr>
+              <tr>
+                <td>Bank Name</td>
+                <td>RAK BANK</td>
+              </tr>
+              <tr>
+                <td>Currency</td>
+                <td>8252517864901</td>
+              </tr>
+              <tr>
+                <td>AED Account Number</td>
+                <td>1234567890</td>
+              </tr>
+              <tr>
+                <td>AED IBAN Number</td>
+                <td>AE930400008252517864901</td>
+              </tr>
+              <tr>
+                <td>Bank SWIFT</td>
+                <td>NRAKAEAK</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>
